@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 12/20/12
  * Time: 11:14 PM
  */
-@Service("carService")
+@Service("carServiceFailed")
 public class CarServiceImpl implements CarService {
     private static List<String> carList = new ArrayList<String>();
 

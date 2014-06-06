@@ -1,13 +1,11 @@
 package com.xvitcoder.angualrspringapp.controller;
 
-import com.xvitcoder.angualrspringapp.service.CarService;
+import com.xvitcoder.angualrspringapp.beans.Car;
+import com.xvitcoder.angualrspringapp.service.CarObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,21 +20,22 @@ import java.util.List;
 public class CarController {
 
     @Autowired
-    private CarService carService;
+    private CarObjectService carService;
 
     @RequestMapping("/carlist.json")
-    public @ResponseBody List<String> getCarList() {
+    public @ResponseBody List<Car> getCarList() {
         return carService.getAllCars();
     }
 
     @RequestMapping(value = "/addCar/{car}", method = RequestMethod.POST)
-    public @ResponseBody void addCar(@PathVariable("car") String car) {
-        carService.addCar(car);
-    }
+    public @ResponseBody void addCar(@RequestBody Car car) { carService.addCar(car);    }
 
-    @RequestMapping(value = "/removeCar/{car}", method = RequestMethod.DELETE)
-    public @ResponseBody void removeCar(@PathVariable("car") String car) {
-        carService.deleteCar(car);
+    @RequestMapping(value = "/updateCar/{car}", method = RequestMethod.PUT)
+    public @ResponseBody void updateCar(@RequestBody Car car) { carService.updateCar(car);    }
+
+    @RequestMapping(value = "/removeCar/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody void removeCar(@PathVariable("id") Long id) {
+        carService.deleteCarById(id);
     }
 
     @RequestMapping(value = "/removeAllCars", method = RequestMethod.DELETE)
@@ -45,7 +44,7 @@ public class CarController {
     }
 
     @RequestMapping("/layout")
-    public String getCarPartialPage() {
+    public String getCarPartialPage(ModelMap modelMap) {
         return "cars/layout";
     }
 }
