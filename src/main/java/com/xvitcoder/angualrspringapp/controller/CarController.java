@@ -1,6 +1,7 @@
 package com.xvitcoder.angualrspringapp.controller;
 
 import com.xvitcoder.angualrspringapp.beans.Car;
+import com.xvitcoder.angualrspringapp.beans.RailwayStation;
 import com.xvitcoder.angualrspringapp.service.CarObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,18 +28,18 @@ public class CarController {
         return carService.getAllCars();
     }
 
-    @RequestMapping(value = "/addCar/{car}", method = RequestMethod.POST)
+    @RequestMapping(value = "/add/", method = RequestMethod.POST)
     public @ResponseBody void addCar(@RequestBody Car car) { carService.addCar(car);    }
 
-    @RequestMapping(value = "/updateCar/{car}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/", method = RequestMethod.PUT)
     public @ResponseBody void updateCar(@RequestBody Car car) { carService.updateCar(car);    }
 
-    @RequestMapping(value = "/removeCar/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.DELETE)
     public @ResponseBody void removeCar(@PathVariable("id") Long id) {
         carService.deleteCarById(id);
     }
 
-    @RequestMapping(value = "/removeAllCars", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/removeAll", method = RequestMethod.DELETE)
     public @ResponseBody void removeAllCars() {
         carService.deleteAll();
     }

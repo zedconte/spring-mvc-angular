@@ -6,6 +6,11 @@ package com.xvitcoder.angualrspringapp.beans;
 public class Car {
     private Long id;
     private String name;
+    private String cylinders;
+
+    public Car() {
+
+    }
 
     public Car(Long id, String name) {
         this.id = id;
@@ -26,5 +31,13 @@ public class Car {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCylinders() {
+        return cylinders;
+    }
+
+    public void setCylinders(String cylinders) {
+        this.cylinders = cylinders;
     }
 }
